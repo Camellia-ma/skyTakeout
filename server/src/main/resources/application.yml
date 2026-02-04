@@ -31,8 +31,8 @@ logging:
 
 sky:
   jwt:
-    # 设置 jwt 签名加密时使用的秘钥
-    admin-secret-key: 柳贯一
+    # 设置 jwt 签名加密时使用的秘钥（至少32个字符）
+    admin-secret-key: itcast1234567890itcast1234567890itcast
     # 设置 jwt 过期时间
     admin-ttl: 3153600000000
     # 设置前端传递过来的令牌名称
