@@ -105,12 +105,12 @@ public class EmployeeController {
 
     /* 修改员工信息 */
     @PutMapping
+    @Operation(summary = "[员工管理]-->修改信息",description = "修改员工信息")
     public Result updateEmployee(@RequestBody EmployeeDTO employeeDTO){
         log.info("修改员工信息 <---> name ==> {}",employeeDTO.getName());
         employeeService.updateEmployee(employeeDTO);
         return Result.success();
     }
 
-    // TODO 完善修改密码功能
 
 }
