@@ -3,7 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.myb.mapper.CategoryMapper">
 
-
+    <!-- 分页查询分类 -->
+    <select id="pageSelect" resultType="com.myb.entity.Category">
+        select * from category
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+        order by sort asc , create_time desc
+    </select>
 
 
 </mapper>

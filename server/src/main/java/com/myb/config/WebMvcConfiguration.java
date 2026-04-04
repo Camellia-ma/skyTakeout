@@ -26,6 +26,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     /**
      * 注册自定义拦截器
      */
+    @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         log.info("开始注册自定义拦截器...");
         registry.addInterceptor(jwtTokenAdminInterceptor)
@@ -36,33 +37,39 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/v3/api-docs/**")
                 .excludePathPatterns("/swagger-ui/**");
     }
-
     /**
      * 设置静态资源映射
      */
+    @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("开始设置静态资源映射...");
-        // Knife4j文档页面
-        registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
-        // WebJars 资源
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-        // OpenAPI 规范文档
-        registry.addResourceHandler("/v3/api-docs/**").addResourceLocations("classpath:/META-INF/resources/");
-        // Swagger UI资源
-        registry.addResourceHandler("/swagger-ui/**").addResourceLocations("classpath:/META-INF/resources/swagger-ui/");
+
+        // 1. 映射 Knife4j 的入口页面
+        registry.addResourceHandler("doc.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        // 2. 映射 Swagger UI 的入口页面 (如果你也想用 swagger-ui.html)
+        registry.addResourceHandler("/swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        // 3. 核心：映射 WebJars (所有的 js, css, 图标都在这里)
+        // 注意：如果这一步没映射对，页面就会是白屏或者 404
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     /**
      * 扩展Spring MVC框架的消息转化器
      */
+    @Override
     protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         log.info("扩展消息转换器...");
         //创建一个消息转换器对象
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         //需要为消息转换器设置一个对象转换器，对象转换器可以将Java对象序列化为json数据
         converter.setObjectMapper(new JacksonObjectMapper());
-        //将自己的消息转化器加入容器中
-        converters.addFirst(converter);
+        //将自己的消息转化器加入容器中，但不是放在第一位，这样可以保证OpenAPI相关的对象使用默认的消息转换器
+        converters.add(converter);
     }
 
 }

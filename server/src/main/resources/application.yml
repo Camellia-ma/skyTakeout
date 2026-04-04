@@ -15,8 +15,8 @@ spring:
 
 mybatis:
   #mapper 配置文件
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.sky.entity
+  mapper-locations: classpath:com/myb/mapper/*.xml
+  type-aliases-package: com.myb.entity
   configuration:
     #开启驼峰命名
     map-underscore-to-camel-case: true
@@ -24,7 +24,7 @@ mybatis:
 logging:
   level:
     com:
-      sky:
+      myb:
         mapper: debug
         service: info
         controller: info
@@ -37,3 +37,14 @@ sky:
     admin-ttl: 3153600000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    # 禁用 SpringDoc 自带的默认 UI 路径，如果你只想用 Knife4j
+    # enabled: false
+    path: /swagger-ui.html
+  # 开启 Knife4j 增强功能
+  knife4j:
+    enable: true
