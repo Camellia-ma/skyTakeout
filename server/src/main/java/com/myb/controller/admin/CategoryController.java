@@ -1,5 +1,6 @@
 package com.myb.controller.admin;
 
+import com.myb.context.BaseContext;
 import com.myb.dto.CategoryDTO;
 import com.myb.dto.CategoryPageQueryDTO;
 import com.myb.result.PageResult;
@@ -39,7 +40,16 @@ public class CategoryController {
     @Operation(summary = "[分类管理]-->新增分类",description = "添加新的分类")
     public Result addNewCategory(@RequestBody CategoryDTO categoryDTO) {
         log.info("新增分类 <--> categoryDTO => {}",categoryDTO);
-//        categoryService.addNewCategory(categoryDTO);
+        categoryService.addNewCategory(categoryDTO);
+        return Result.success();
+    }
+
+    /* 根据 id 删除分类 */
+    @DeleteMapping
+    @Operation(summary = "[分类管理]-->删除分类",description = "根据 id 删除分类")
+    public Result deleteCategory(Long id){
+        log.info("删除分类 <--> id ==> {} | 操作id ==> {}",id, BaseContext.getCurrentId());
+        categoryService.delete(id);
         return Result.success();
     }
 

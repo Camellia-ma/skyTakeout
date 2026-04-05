@@ -15,7 +15,7 @@ public class SwaggerConfiguration {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("苍穹外卖接口文档")
+                        .title("=====> 苍穹外卖接口文档 <=====")
                         .version("1.0")
                         .description("苍穹外卖系统 API 文档"));
     }
