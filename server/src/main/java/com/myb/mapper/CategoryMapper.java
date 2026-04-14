@@ -18,4 +18,8 @@ public interface CategoryMapper {
 
     /* 根据 id 删除分类 */
     void delete(Long id);
+
+    /* 更新操作 */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Category category);
 }

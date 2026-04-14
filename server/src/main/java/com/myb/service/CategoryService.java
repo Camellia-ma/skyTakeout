@@ -13,4 +13,7 @@ public interface CategoryService {
 
     /* 根据 id删除分类 */
     void delete(Long id);
+
+    /* 修改分类状态 */
+    void changeCategoryStatus(Integer status, Long id);
 }

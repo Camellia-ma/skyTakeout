@@ -3,6 +3,7 @@ package com.myb.service.Impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.myb.constant.MessageConstant;
+import com.myb.context.BaseContext;
 import com.myb.dto.CategoryDTO;
 import com.myb.dto.CategoryPageQueryDTO;
 import com.myb.entity.Category;
@@ -15,6 +16,8 @@ import com.myb.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -57,5 +60,20 @@ public class CategoryServiceImpl implements CategoryService {
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
         }
         categoryMapper.delete(id);
+    }
+
+    /* 修改分类状态 */
+    @Override
+    public void changeCategoryStatus(Integer status, Long id) {
+        // 构建新对象承接状态以及 id
+        Category category = Category.builder()
+                .id(id)
+                .status(status)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+
+        // 执行更新操作
+        categoryMapper.update(category);
     }
 }

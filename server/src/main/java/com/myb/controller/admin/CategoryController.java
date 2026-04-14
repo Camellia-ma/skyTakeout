@@ -53,4 +53,18 @@ public class CategoryController {
         return Result.success();
     }
 
+    /* 启用或禁用分类 */
+    @PostMapping("/status/{status}")
+    @Operation(summary = "[分类管理]-->修改状态",description = "启用或禁用分类")
+    public Result changeCategoryStatus(@PathVariable Integer status,Long id){
+        log.info("修改分类状态 <--> currentStatus ==> {} | id ==> {}",status,id);
+        categoryService.changeCategoryStatus(status,id);
+        return Result.success();
+    }
+
+    /* 修改分类 */
+
+
+    /* 根据类型查询分类 */
+
 }
