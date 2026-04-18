@@ -7,6 +7,8 @@ import com.myb.entity.Category;
 import com.myb.enumeration.OperationType;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface CategoryMapper {
     /* 分页查询分类 */
@@ -22,4 +24,7 @@ public interface CategoryMapper {
     /* 更新操作 */
     @AutoFill(value = OperationType.UPDATE)
     void update(Category category);
+
+    /* 根据类型查询分类 */
+    List<Category> getCategoryByType(Integer type);
 }

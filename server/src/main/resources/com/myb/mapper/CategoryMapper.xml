@@ -56,4 +56,14 @@
         where id = #{id}
     </update>
 
+    <!-- 根据类型查询分类 -->
+    <select id="getCategoryByType" resultType="Category">
+        select * from category
+        where status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort ,create_time desc
+    </select>
+
 </mapper>

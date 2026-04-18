@@ -2,7 +2,10 @@ package com.myb.service;
 
 import com.myb.dto.CategoryDTO;
 import com.myb.dto.CategoryPageQueryDTO;
+import com.myb.entity.Category;
 import com.myb.result.PageResult;
+
+import java.util.List;
 
 public interface CategoryService {
     /* 分页查询分类 */
@@ -16,4 +19,10 @@ public interface CategoryService {
 
     /* 修改分类状态 */
     void changeCategoryStatus(Integer status, Long id);
+
+    /* 修改分类 */
+    void updateCategory(CategoryDTO categoryDTO);
+
+    /* 根据类型查询分类 */
+    List<Category> getCategoryByType(Integer type);
 }

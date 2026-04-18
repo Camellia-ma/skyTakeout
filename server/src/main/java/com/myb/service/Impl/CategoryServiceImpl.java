@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -75,5 +76,21 @@ public class CategoryServiceImpl implements CategoryService {
 
         // 执行更新操作
         categoryMapper.update(category);
+    }
+
+    /* 修改分类 */
+    @Override
+    public void updateCategory(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        // 复制
+        BeanUtils.copyProperties(categoryDTO, category);
+        // 执行更新操作
+        categoryMapper.update(category);
+    }
+
+    /* 根据类型查询分类 */
+    @Override
+    public List<Category> getCategoryByType(Integer type) {
+        return categoryMapper.getCategoryByType(type);
     }
 }

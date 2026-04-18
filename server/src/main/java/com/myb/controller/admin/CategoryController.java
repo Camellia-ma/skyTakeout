@@ -3,6 +3,7 @@ package com.myb.controller.admin;
 import com.myb.context.BaseContext;
 import com.myb.dto.CategoryDTO;
 import com.myb.dto.CategoryPageQueryDTO;
+import com.myb.entity.Category;
 import com.myb.result.PageResult;
 import com.myb.result.Result;
 import com.myb.service.CategoryService;
@@ -11,6 +12,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 分类管理 -- 管理分类的增删改查
@@ -63,8 +66,21 @@ public class CategoryController {
     }
 
     /* 修改分类 */
-
+    @PutMapping
+    @Operation(summary = "[分类管理]-->修改分类",description = "修改分类")
+    public Result updateCategory(@RequestBody CategoryDTO categoryDTO){
+        log.info("修改分类 <--> category=> {}",categoryDTO.getId());
+        categoryService.updateCategory(categoryDTO);
+        return Result.success();
+    }
 
     /* 根据类型查询分类 */
+    @GetMapping("/list")
+    @Operation(summary = "[分类管理]-->类型查询",description = "根据类型查询分类")
+    public Result<List<Category>> getCategoryByType(Integer type){
+        log.info("根据类型查询分类 <--> type ==> {}",type);
+        List<Category> result = categoryService.getCategoryByType(type);
+        return Result.success(result);
+    }
 
 }
