@@ -9,6 +9,6 @@ sky:
 
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id: LTAI5tKqDkbQRjsteQ4CqJZD
-    access-key-secret: NBTRh837k8NEev2L7MjhMqf7aPYXu1
+    access-key-id: ${OSS_ACCESS_KEY_ID}
+    access-key-secret: ${OSS_ACCESS_KEY_SECRET}
     bucket-name: springboot-skyout
