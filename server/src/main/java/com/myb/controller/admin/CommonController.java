@@ -37,7 +37,10 @@ public class CommonController {
             //原始文件名
             String originalFilename = file.getOriginalFilename();
             //截取原始文件名的后缀   dfdfdf.png
-            String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String extension = null;
+            if (originalFilename != null) {
+                extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+            }
             //构造新文件名称，按年份/月份/文件名称层级存放
             LocalDateTime now = LocalDateTime.now();
             String year = now.format(DateTimeFormatter.ofPattern("yyyy"));
